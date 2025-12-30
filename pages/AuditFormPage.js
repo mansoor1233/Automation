@@ -53,9 +53,7 @@ export class AuditFormPage {
     async feequoted(fee) {
         await this.page.locator("(//div//input[@class='TextInput---text TextInput---align_end'])[1]").fill(fee);//fee
     }
-    // async selectRadioOption(option) {
-    //     await this.page.locator(`//input[@value='${option}']`).check();
-    // }
+    
 
     async radioactive() {
         await this.page.click("(//div[contains(@class,'RadioSelect---choice_pair')])[2]");
@@ -113,53 +111,6 @@ export class AuditFormPage {
     // await this.page.locator("(//div//input[@type='text'][@placeholder='Enter your text |'])[7]").fill(name5);
 
 
-
-
-    // async feeValuesLc(Lcfees = []) {
-
-    //     const feeInputs = this.page.locator(
-    //         "(//div//input[@type='text'][@value='0.00'])"
-    //     );
-
-    //     const inputCount = await feeInputs.count();
-
-    //     for (let i = 0; i < Lcfees.length; i++) {
-
-    //         const value = Lcfees[i];
-
-    //         if (value === undefined) {
-    //             throw new Error(`Lcfees value missing at index ${i}`);
-    //         }
-
-    //         const targetIndex = 2 + i;
-
-    //         if (targetIndex >= inputCount) {
-    //             console.warn(`Skipping index ${targetIndex} – input not present`);
-    //             break;
-    //         }
-
-    //         await feeInputs.nth(targetIndex).scrollIntoViewIfNeeded();
-    //         await feeInputs.nth(targetIndex).fill(String(value));
-    //     }
-    // }
-
-
-    // feeLcInputs() {
-    //     return this.page.locator(
-    //         "//div[.//strong[normalize-space()='Fees in LC']]//input[@type='text']"
-    //     );
-    // }
-
-    // async fillFeeLc(values) {
-    //     const inputs = this.feeLcInputs();
-    //     const count = await inputs.count();
-
-    //     for (let i = 0; i < Math.min(values.length, count); i++) {
-    //         await inputs.nth(i).scrollIntoViewIfNeeded();
-    //         await inputs.nth(i).fill(String(values[i]));
-    //     }
-    // }
-
      async feeValuesLc(Lcfees) {
         for (let i = 0; i <Lcfees.length; i++) {
             // 1. Re-fetch the inputs inside the loop to avoid stale elements
@@ -172,100 +123,6 @@ export class AuditFormPage {
             await this.page.waitForTimeout(500); 
         }
     }
-
-    // async feeValuesLc(Lcfees) {
-    //     // 1. Target the row strictly by its text to avoid picking up USD fields
-    //     const feeRowInputs = this.page.locator('tr:has-text("Fees in LC (DZD)") input.TextInput---align_end');
-
-    //     for (let i = 0; i < Lcfees.length; i++) {
-    //         const currentInput = feeRowInputs.nth(i);
-    //         await currentInput.scrollIntoViewIfNeeded();
-
-    //         // 3. Force the click to bypass any transparent loading overlays
-    //         await currentInput.click({ force: true });
-
-    //         // 4. Use fill to set the value
-    //         await currentInput.fill(Lcfees[i]);
-
-    //         // 5. CRITICAL: Press Tab to trigger Appian's internal 'save' logic
-    //         await this.page.keyboard.press('Tab');
-
-    //         // 6. Wait for the loading bar at the top to disappear (settle time)
-    //         await this.page.waitForTimeout(1000); 
-    //     }
-    // }
-    // async feeValuesLc(Lcfees) {
-    //     // 1. Use a locator that doesn't change when you fill a value
-    //     const feeInputs = this.page.locator("(//div//input[@type='text'][@value='0.00'])");
-
-    //     for (let i = 0; i < Lcfees.length; i++) {
-    //         const currentField = feeInputs.nth(i);
-
-    //         // 2. Click before filling to ensure focus is correct
-    //         await currentField.click();
-    //         await currentField.fill(Lcfees[i]);
-
-    //         // 3. Force the 'save' event
-    //         //await this.page.keyboard.press('Tab');
-
-    //         // 4. Wait for the loading/AJAX state to finish
-    //         // In Appian, this is often the most critical step to avoid skipping
-    //         //await this.page.waitForTimeout(1000); 
-    //     }
-    // }
-
-    // async feeValuesLc(Lcfees) {
-    //     const feeInputs = this.page.locator("(//div//input[@type='text'][@value='0.00'])");
-
-    //     for (let i = 0; i <= Lcfees.length; i++) {
-
-    //         await feeInputs.nth(i).fill(Lcfees[i]);
-    //         //await this.page.waitForTimeout(500); 
-
-    //         //console.log('Total fee inputs:', await feeInputs.count());
-
-    //     }
-    // }
-
-
-    // async feevalues(Lcfee1, Lcfee2, Lcfee3, Lcfee4, Lcfee5) {    
-
-    //     await this.page.locator("(//div//input[@class='TextInput---text TextInput---align_end'])[3]").fill(Lcfee1);
-    //     await this.page.locator("(//div//input[@class='TextInput---text TextInput---align_end'])[4]").fill(Lcfee2);
-    //     await this.page.locator("(//div//input[@class='TextInput---text TextInput---align_end'])[5]").fill(Lcfee3);
-    //     await this.page.locator("(//div//input[@class='TextInput---text TextInput---align_end'])[6]").fill(Lcfee4);
-    //     await this.page.locator("(//div//input[@class='TextInput---text TextInput---align_end'])[7]").fill(Lcfee5);
-
-
-    // }
-
-    // async feeValuesUs(Usfees = []) {
-
-    //     const feeInputs = this.page.locator(
-    //         "//input[contains(@class,'TextInput--align_end')]"
-    //     );
-
-    //     const inputCount = await feeInputs.count();
-
-    //     for (let i = 0; i < Usfees.length; i++) {
-
-    //         const value = Usfees[i];
-
-    //         if (value === undefined) {
-    //             throw new Error(`Usfees value missing at index ${i}`);
-    //         }
-
-    //         const targetIndex = 7 + i;
-
-    //         if (targetIndex >= inputCount) {
-    //             console.warn(`Skipping index ${targetIndex} – input not present`);
-    //             break;
-    //         }
-
-    //         await feeInputs.nth(targetIndex).scrollIntoViewIfNeeded();
-    //         await feeInputs.nth(targetIndex).fill(String(value));
-    //     }
-    // }
 
 
     async feeValuesUs(Usfees) {
